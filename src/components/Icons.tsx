@@ -1,5 +1,6 @@
 import {
   AlertTriangle,
+  ArrowUpDown,
   BadgeInfo,
   CheckCircle2,
   Loader2,
@@ -20,4 +21,5 @@ export const Icons = {
   success: CheckCircle2,
   settings: Settings,
   info: BadgeInfo,
+  arrowUpDown: ArrowUpDown,
 };
