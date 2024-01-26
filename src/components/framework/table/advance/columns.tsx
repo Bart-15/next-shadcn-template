@@ -1,5 +1,12 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/named */
 'use client';
+
+declare module '@tanstack/table-core' {
+  interface FilterFns {
+    filterByFuelType: FilterFn<unknown>;
+  }
+}
 
 import {
   DropdownMenu,
@@ -9,7 +16,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@radix-ui/react-dropdown-menu';
-import { ColumnDef } from '@tanstack/react-table';
+import { createColumnHelper, FilterFn } from '@tanstack/react-table';
 import { MoreHorizontal } from 'lucide-react';
 
 import { Icons } from '@/components/Icons';
@@ -21,11 +28,16 @@ export type User = {
   email: string;
   image: string;
   lastSeen: string;
+  carFuelType: string;
 };
 
-export const columns: ColumnDef<User>[] = [
-  {
-    accessorKey: 'name',
+export type UserKey = keyof User;
+
+export const columnHelper = createColumnHelper<User>();
+
+export const defaultColumns = [
+  // Display Columns
+  columnHelper.accessor('name', {
     header: ({ column }) => {
       return (
         <Button
@@ -37,21 +49,53 @@ export const columns: ColumnDef<User>[] = [
         </Button>
       );
     },
-  },
-  {
-    accessorKey: 'email',
-    header: 'Email',
-  },
-  {
-    accessorKey: 'lastSeen',
-    header: 'Last Seen',
+  }),
+  columnHelper.accessor('email', {
+    header: ({ column }) => {
+      return (
+        <Button
+          variant='ghost'
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        >
+          Email
+          <Icons.arrowUpDown className='ml-2 h-4 w-4' />
+        </Button>
+      );
+    },
+  }),
+  columnHelper.accessor('lastSeen', {
+    header: ({ column }) => {
+      return (
+        <Button
+          variant='ghost'
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        >
+          Last Seen
+          <Icons.arrowUpDown className='ml-2 h-4 w-4' />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       const date = new Date(row.getValue('lastSeen'));
       const formatted = date.toLocaleString();
       return <div className='font-medium'>{formatted}</div>;
     },
-  },
-  {
+  }),
+  columnHelper.accessor('carFuelType', {
+    filterFn: 'filterByFuelType' as any,
+    header: ({ column }) => {
+      return (
+        <Button
+          variant='ghost'
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        >
+          Fuel Type
+          <Icons.arrowUpDown className='ml-2 h-4 w-4' />
+        </Button>
+      );
+    },
+  }),
+  columnHelper.display({
     id: 'actions',
     cell: ({ row }) => {
       const user = row.original;
@@ -81,5 +125,24 @@ export const columns: ColumnDef<User>[] = [
         </DropdownMenu>
       );
     },
-  },
+  }),
 ];
+
+export const filterOptions = [
+  {
+    id: 'name',
+    label: 'Name',
+  },
+  {
+    id: 'email',
+    label: 'Email',
+  },
+  {
+    id: 'lastSeen',
+    label: 'Last Seen',
+  },
+  {
+    id: 'carFuelType',
+    label: 'Car Fuel',
+  },
+] as const;

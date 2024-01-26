@@ -12,7 +12,6 @@ import {
 import { ColumnDef } from '@tanstack/react-table';
 import { MoreHorizontal } from 'lucide-react';
 
-import { Icons } from '@/components/Icons';
 import { Button } from '@/components/ui/button';
 
 export type User = {
@@ -23,20 +22,10 @@ export type User = {
   lastSeen: string;
 };
 
-export const columns: ColumnDef<User>[] = [
+export const simpleTableColumns: ColumnDef<User>[] = [
   {
     accessorKey: 'name',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant='ghost'
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Name
-          <Icons.arrowUpDown className='ml-2 h-4 w-4' />
-        </Button>
-      );
-    },
+    header: 'Name',
   },
   {
     accessorKey: 'email',
