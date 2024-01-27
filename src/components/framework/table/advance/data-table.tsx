@@ -9,7 +9,6 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  Row,
   SortingState,
   useReactTable,
   VisibilityState,
@@ -17,6 +16,7 @@ import {
 import { ChangeEvent, useState } from 'react';
 
 import { Button, buttonVariants } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -73,10 +73,9 @@ export function DataTable<TData, TValue>({
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onGlobalFilterChange: setGlobalFilter,
-    enableColumnFilters: true,
     filterFns: {
-      filterByFuelType: (row, columnId, filterValue) => {
-        return true;
+      isActiveFilter: (row, columnId, filterValue) => {
+        return filterValue ? row.original[columnId] == true : row.original;
       },
     },
     state: {
@@ -133,6 +132,20 @@ export function DataTable<TData, TValue>({
           >
             Clear
           </Button>
+          <div className='flex items-center space-x-2'>
+            <Checkbox
+              id='terms'
+              onCheckedChange={(event) =>
+                table.getColumn('active')?.setFilterValue(event)
+              }
+            />
+            <label
+              htmlFor='terms'
+              className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
+            >
+              Active
+            </label>
+          </div>
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

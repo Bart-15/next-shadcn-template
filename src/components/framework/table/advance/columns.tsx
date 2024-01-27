@@ -2,12 +2,6 @@
 /* eslint-disable import/named */
 'use client';
 
-declare module '@tanstack/table-core' {
-  interface FilterFns {
-    filterByFuelType: FilterFn<unknown>;
-  }
-}
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,7 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@radix-ui/react-dropdown-menu';
-import { createColumnHelper, FilterFn } from '@tanstack/react-table';
+import { createColumnHelper } from '@tanstack/react-table';
 import { MoreHorizontal } from 'lucide-react';
 
 import { Icons } from '@/components/Icons';
@@ -29,6 +23,7 @@ export type User = {
   image: string;
   lastSeen: string;
   carFuelType: string;
+  active: string;
 };
 
 export type UserKey = keyof User;
@@ -82,7 +77,6 @@ export const defaultColumns = [
     },
   }),
   columnHelper.accessor('carFuelType', {
-    filterFn: 'filterByFuelType' as any,
     header: ({ column }) => {
       return (
         <Button
@@ -93,6 +87,23 @@ export const defaultColumns = [
           <Icons.arrowUpDown className='ml-2 h-4 w-4' />
         </Button>
       );
+    },
+  }),
+  columnHelper.accessor('active', {
+    filterFn: 'isActiveFilter' as any,
+    header: ({ column }) => {
+      return (
+        <Button variant='ghost'>
+          Active
+          <Icons.arrowUpDown className='ml-2 h-4 w-4' />
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const value = row.getValue('active');
+      const formatted = value ? 'Yes' : 'No';
+
+      return <span className='font-medium'>{formatted}</span>;
     },
   }),
   columnHelper.display({
