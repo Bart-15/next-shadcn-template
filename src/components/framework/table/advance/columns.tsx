@@ -141,19 +141,19 @@ export const defaultColumns = [
 
 export const filterOptions = [
   {
-    id: 'name',
+    value: 'name',
     label: 'Name',
   },
   {
-    id: 'email',
+    value: 'email',
     label: 'Email',
   },
   {
-    id: 'lastSeen',
+    value: 'lastSeen',
     label: 'Last Seen',
   },
   {
-    id: 'carFuelType',
+    value: 'carFuelType',
     label: 'Car Fuel',
   },
-] as const;
+];
