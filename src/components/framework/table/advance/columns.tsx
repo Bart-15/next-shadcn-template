@@ -157,3 +157,28 @@ export const filterOptions = [
     label: 'Car Fuel',
   },
 ];
+
+export const filterableColumns = [
+  {
+    id: 'carFuelType',
+    title: 'Car Fuel Type',
+    options: [
+      {
+        value: 'gasoline',
+        label: 'Gasoline',
+      },
+      {
+        value: 'diesel',
+        label: 'Diesel',
+      },
+      {
+        value: 'hybrid',
+        label: 'Hybrid',
+      },
+      {
+        value: 'electric',
+        label: 'Electric',
+      },
+    ],
+  },
+] as const;

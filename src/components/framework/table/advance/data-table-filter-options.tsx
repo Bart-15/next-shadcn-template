@@ -4,6 +4,7 @@ import { ColumnDef } from '@tanstack/react-table';
 import { type Table } from '@tanstack/react-table';
 import { ChangeEvent, SetStateAction } from 'react';
 
+import { Icons } from '@/components/Icons';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
@@ -74,12 +75,20 @@ export function DataTableFilterOptions<TData, TValue>({
             ))}
           </SelectContent>
         </Select>
-        <Button
-          className={cn(buttonVariants({ variant: 'destructive' }))}
-          onClick={clear}
-        >
-          Clear
-        </Button>
+        {(filterBy || globalFilter) && (
+          <Button
+            className={cn(
+              buttonVariants({
+                variant: 'secondary',
+                className: 'transition duration-150 ease-in-out',
+              }),
+            )}
+            onClick={clear}
+          >
+            <Icons.error className='mr-1 h-4 w-4' />
+            Clear
+          </Button>
+        )}
         <div className='flex items-center space-x-2'>
           <Checkbox
             id='terms'
