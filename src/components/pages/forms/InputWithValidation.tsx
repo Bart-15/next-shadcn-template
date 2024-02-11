@@ -84,7 +84,6 @@ const LoginCard = () => {
           </CardContent>
           <CardFooter className='flex'>
             <Button
-              isLoading={status === 'pending'}
               form='login-form'
               type='submit'
               className={buttonVariants({
