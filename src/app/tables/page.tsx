@@ -2,12 +2,8 @@ import Link from 'next/link';
 
 import { defaultColumns } from '@/components/framework/table/advance/columns';
 import { DataTable as TableWithSearch } from '@/components/framework/table/advance/data-table';
-import { simpleTableColumns } from '@/components/framework/table/simple-table/columns';
-import { DataTable as SimpleTable } from '@/components/framework/table/simple-table/data-table';
-import { withPaginationColumns } from '@/components/framework/table/with-pagination/columns';
-import { DataTable as TableWithPagination } from '@/components/framework/table/with-pagination/data-table';
 import { Heading } from '@/components/framework/typography';
-import { Button, buttonVariants } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 async function getUsers(endpoint: string) {
@@ -32,22 +28,6 @@ const TablePage = async () => {
       >
         Go Back
       </Link>
-      {/* <Heading as='h1' className='my-2 text-center font-bold'>
-        Tables
-      </Heading> */}
-
-      {/* Simple Table */}
-      {/* <Heading as='h3' className='mb-4'>
-        Simple Table
-      </Heading>
-      <SimpleTable columns={simpleTableColumns} data={users} /> */}
-
-      {/* With Pagination */}
-      {/* <Heading as='h3' className='my-4'>
-        With Pagination
-      </Heading>
-      <TableWithPagination columns={withPaginationColumns} data={users} /> */}
-
       <Heading as='h3' className='my-4'>
         Advanced Table
       </Heading>

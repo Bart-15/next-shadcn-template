@@ -19,4 +19,32 @@ export const pages = [
     link: '/tables',
     label: 'Tanstack Tables (Ongoing)',
   },
+  {
+    id: 5,
+    link: '/forms',
+    label: 'Forms',
+  },
 ] as const;
+
+export const hobbies = [
+  {
+    value: 'dancing',
+    label: 'Dancing',
+  },
+  {
+    value: 'playing-guitar',
+    label: 'Playing Guitar',
+  },
+  {
+    value: 'singing',
+    label: 'Singing',
+  },
+  {
+    value: 'coding',
+    label: 'Coding',
+  },
+  {
+    value: 'eating',
+    label: 'Eating',
+  },
+];

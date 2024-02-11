@@ -4,6 +4,7 @@ import {
   BadgeInfo,
   CheckCircle2,
   Loader2,
+  Search,
   Settings,
   Tag,
   User,
@@ -22,4 +23,5 @@ export const Icons = {
   settings: Settings,
   info: BadgeInfo,
   arrowUpDown: ArrowUpDown,
+  search: Search,
 };
